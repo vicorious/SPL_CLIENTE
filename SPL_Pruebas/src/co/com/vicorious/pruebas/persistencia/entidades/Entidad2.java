@@ -1,5 +1,6 @@
 package co.com.vicorious.pruebas.persistencia.entidades;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import co.com.vicorious.persistencia.anotaciones.Columna;
@@ -45,6 +46,9 @@ public class Entidad2
 	
 	@Columna(nombre = "ATRIBUTO_DECIMAL", tipoDato = TipoElementoDB.DECIMAL)
 	private double atributodecimal;
+	
+	@Columna(nombre = "ATRIBUTO_TIMESTAMP", tipoDato = TipoElementoDB.TIMESTAMP, formato = "yyyy-MM-dd HH:mm:ss")	
+	private LocalDateTime atributo_timestamp;
 	
 	@UnoAMuchos
 	@Columna
@@ -121,5 +125,25 @@ public class Entidad2
 	{
 		this.entidades = entidades;
 	}
+
+	/**
+	 * Getter
+	 * @return atributo timestamp de la entidad
+	 */
+	public LocalDateTime getAtributo_timestamp() 
+	{
+		return atributo_timestamp;
+	}
+
+	/**
+	 * Setter
+	 * @param atributo_timestamp: atributo_timestamp a asignar
+	 */
+	public void setAtributo_timestamp(LocalDateTime atributo_timestamp) 
+	{
+		this.atributo_timestamp = atributo_timestamp;
+	}
+	
+	
 			
 }//No borrar

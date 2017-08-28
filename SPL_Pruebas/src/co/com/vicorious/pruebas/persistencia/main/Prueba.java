@@ -27,6 +27,8 @@ import co.com.vicorious.pruebas.persistencia.entidades.Parametro;
 import co.com.vicorious.pruebas.persistencia.entidades.PedidoTO;
 import co.com.vicorious.pruebas.persistencia.entidades.Usuario;
 
+
+
 /**
  *   <p>Prueba</p>	
  * 	 @author Alejandro Lindarte Castro <strong>Copyright 2017</strong>
@@ -78,6 +80,8 @@ public class Prueba extends Logueable
 			
 			/*****************************************************************************************************/
 			
+			
+			
 			/**
 			 * 
 			 * Apartir de aqui ya puedes llamar algunos de los metodos 
@@ -125,6 +129,8 @@ public class Prueba extends Logueable
 			//xml();
 			
 			//entidadID();	
+			
+			getEntidad2TimestampColumn();
 			
 			/***************************************************************************************/
 			
@@ -703,6 +709,27 @@ public class Prueba extends Logueable
 		}
 		
 	}//getPredicado		
+	
+	/**
+	 * CASO ESTUDIO 19. Get columna timestamp
+	 */
+	@SuppressWarnings("unchecked")
+	public static void getEntidad2TimestampColumn()
+	{
+		try
+		{
+			Optional<List<Entidad2>> entidades = (Optional<List<Entidad2>>) unidad.get(Entidad2.class);
+			if(entidades.isPresent())
+			{
+				List<Entidad2> entidades2 = entidades.get();
+				entidades2.stream().map(Entidad2::getAtributo_timestamp).forEach(System.out::println);
+			}
+			
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+	}//getEntidad2TimestampColumn
 	
 	@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
 	private static void consumer()
