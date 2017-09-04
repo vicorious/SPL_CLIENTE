@@ -22,6 +22,7 @@ import co.com.vicorious.pruebas.persistencia.dbobjects.FuncionPrueba;
 import co.com.vicorious.pruebas.persistencia.dbobjects.Procedimiento;
 import co.com.vicorious.pruebas.persistencia.entidades.Entidad;
 import co.com.vicorious.pruebas.persistencia.entidades.Entidad2;
+import co.com.vicorious.pruebas.persistencia.entidades.Establecimiento;
 import co.com.vicorious.pruebas.persistencia.entidades.FormaPagoTO;
 import co.com.vicorious.pruebas.persistencia.entidades.Parametro;
 import co.com.vicorious.pruebas.persistencia.entidades.PedidoTO;
@@ -130,7 +131,9 @@ public class Prueba extends Logueable
 			
 			//entidadID();	
 			
-			getEntidad2TimestampColumn();
+			//getEntidad2TimestampColumn();
+			
+			getEstablecimientos();
 			
 			/***************************************************************************************/
 			
@@ -730,6 +733,27 @@ public class Prueba extends Logueable
 			ex.printStackTrace();
 		}
 	}//getEntidad2TimestampColumn
+	
+	/**
+	 * CASO ESTUDIO 20. Lazy
+	 */
+	@SuppressWarnings("unchecked")
+	public static void getEstablecimientos()
+	{
+		try
+		{
+			Optional<List<Establecimiento>> entidades = (Optional<List<Establecimiento>>) unidad.get(Establecimiento.class);
+			if(entidades.isPresent())
+			{
+				List<Establecimiento> entidades2 = entidades.get();
+				entidades2.stream().map(Establecimiento::getCodigo).forEach(System.out::println);
+			}
+			
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+	}//getEstablecimientos
 	
 	@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
 	private static void consumer()

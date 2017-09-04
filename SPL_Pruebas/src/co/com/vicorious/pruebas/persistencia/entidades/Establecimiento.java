@@ -55,7 +55,7 @@ public class Establecimiento
 	@Columna(nombre = "IMAGEN", tipoDato = TipoElementoDB.TEXT)
 	private String imagen;
 	
-	@UnoAMuchos
+	@UnoAMuchos(lazy = true)
 	@Columna
 	private List<Producto> productos;
 
