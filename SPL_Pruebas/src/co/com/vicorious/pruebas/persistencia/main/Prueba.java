@@ -20,14 +20,15 @@ import co.com.vicorious.persistencia.utilidades.Logueable;
 import co.com.vicorious.pruebas.persistencia.dbobjects.FuncionPostgreSQL;
 import co.com.vicorious.pruebas.persistencia.dbobjects.FuncionPrueba;
 import co.com.vicorious.pruebas.persistencia.dbobjects.Procedimiento;
+import co.com.vicorious.pruebas.persistencia.entidades.App;
 import co.com.vicorious.pruebas.persistencia.entidades.Entidad;
 import co.com.vicorious.pruebas.persistencia.entidades.Entidad2;
 import co.com.vicorious.pruebas.persistencia.entidades.Establecimiento;
 import co.com.vicorious.pruebas.persistencia.entidades.FormaPagoTO;
 import co.com.vicorious.pruebas.persistencia.entidades.Parametro;
 import co.com.vicorious.pruebas.persistencia.entidades.PedidoTO;
+import co.com.vicorious.pruebas.persistencia.entidades.Tokenizacion;
 import co.com.vicorious.pruebas.persistencia.entidades.Usuario;
-
 
 
 /**
@@ -133,7 +134,13 @@ public class Prueba extends Logueable
 			
 			//getEntidad2TimestampColumn();
 			
-			getEstablecimientos();
+			//getEstablecimientos();
+			
+			//fixOpcional();
+			
+			//actualizarUsuarioPostgreSQL();
+			
+			actualizarAPP();
 			
 			/***************************************************************************************/
 			
@@ -754,6 +761,54 @@ public class Prueba extends Logueable
 			ex.printStackTrace();
 		}
 	}//getEstablecimientos
+	
+	/**
+	 * 
+	 */
+	@SuppressWarnings("unused")
+	public static void fixOpcional()
+	{
+		try
+		{
+			App appe = new App();
+			appe.setCodigo("vegan");
+			Optional<?> resultado = unidad.get(appe);
+						
+			if(resultado.isPresent())
+			{
+				Object a = resultado.get();				
+			}else
+			{
+				
+			}
+			
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+	}
+	
+	public static void actualizarAPP()
+	{
+		try
+		{
+			Tokenizacion token = new Tokenizacion();
+			token.setActivo("A");
+			token.setTicket("b97s3cqldb5bsj9o43o9nimqtb");
+			token.setApp(new App(0,"VEGAN"));
+			Optional<?> tokeconsultado = unidad.get(token,"FECHA_CREACION");
+			if(tokeconsultado.isPresent())
+			{
+				token = ((Tokenizacion)((List<?>)tokeconsultado.get()).get(0));
+				token.setActivo("I");//Si existe, vamos a volverlo inactivo
+			}
+			unidad.actualizar(token,"FECHA_CREACION","APP");
+			
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
 	private static void consumer()
